@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+
+    <title>To Do List</title>
+    <script src="https://kit.fontawesome.com/5ba87fdece.js" crossorigin="anonymous"></script>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+<!-- <script src="https://requirejs.org/docs/release/2.3.5/minified/require.js"></script> -->
+    
+    <link rel="stylesheet" type="text/css" href="/css/home.css">
+<script src="/js/script.js"></script>
+
+</head>
+<body>
+    <form action="/createtodo" method="POST">
+    <div id="box">
+    <h1>To Do List</h1>
+    <div  class="input-box">
+        <h2>Description</h2>
+        <input title="Description" type="text" name="description">
+    </div>
+    <div class="box1">
+    <div class="input-box row">
+        <h2>Category</h2>        
+       <select title="Category" name="category">
+        <option  selected > Choose a Category</option>
+
+           <option> Work</option>
+           <option> School</option>
+           <option> Personal</option>
+           <option> Other</option>
+       </select>
+    </div>
+    <div class="input-box row">
+        <h2>Due Date</h2>
+        <input title="Date"type="date" name="duedate">
+    </div>
+    </div>
+    <br><br>
+    <div class="box1 buttons">
+        <button id="add" class="btn" type="submit"> <i class="fa-solid fa-plus"></i> Add Task</button>
+       
+    </div>
+</div>
+</form>
+<div id="content">
+    <ul id="listcard">
+        <% for(let i of toDoList){%> 
+        <li>
+            
+    <div class="card">
+        <hr class="divider">
+       
+    <input title="mark" type="checkbox" id="checkinput" class="checkinputs" name="checkinput" value="<%= i.description %>" onclick="boxChecked(event)"" data-category="<%= i.category %>" data-id="<%=i._id%>"/>
+
+    <label for="checkinput"><%=i.description %></label>
+    <i class="fa-solid fa-calendar-days" id="calendar"></i>
+    <hr id="marked" class="divider">
+    <p class="date"><%= i.duedate %></p>
+    <p class="category"><%= i.category %></p>
+    <a href="deletetodo/?id=<%= i._id%>" id="delicon">
+        <i class="fa-solid fa-trash-can"></i>
+    </a>
+</div>
+</li>
+<%}%>
+</ul>
+</div>
+</body>
+</html>
